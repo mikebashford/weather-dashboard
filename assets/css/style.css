@@ -21,7 +21,12 @@ body
   display: flex;
   flex-direction: column;
   position: relative;
-  margin: 1rem;
+  margin-left: 1rem;
+}
+
+.search-bar h2
+{
+  margin-bottom: 10px;
 }
 
 .search-bar
@@ -31,17 +36,62 @@ body
   height: 100vh;
 }
 
-.weather-info
+#city
 {
-  position: absolute;
-  left: 20rem;
-  width: 60%;
+  margin-bottom: 10px;
+  resize: none;
+  border-radius: 5px;
+  color: rgba(red, green, blue, 0.25);
 }
 
-.weather-cards
+.search-btn
+{
+  width: 75%;
+  color: white;
+  background-color: blue;
+  border-radius: 5px;
+}
+
+.weather-info
+{
+  border: 1px solid black;
+  position: absolute;
+  margin-top: 2%;
+  left: 15rem;
+  width: 65%;
+  height: 25vh;
+}
+
+.weather-info h2
+{
+  margin-top: auto;
+}
+
+.forecast
 {
   position: absolute;
-  left: 20rem;
-  top: 20rem;
-  width: 60%;
+  left: 15rem;
+  top: 15rem;
+  width: 80%;
+}
+
+.forecast h1
+{
+ margin: auto;
+}
+
+.column
+{
+  float: left;
+  width: 15%;
+  padding: 0 10px 0 0px;
+  margin-top: 10px;
+}
+
+.card
+{
+  font-size: 18px;
+  height: 20vh;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .3);
+  border-radius: 5px;
 }
