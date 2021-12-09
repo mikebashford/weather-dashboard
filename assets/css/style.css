@@ -50,6 +50,13 @@ body
   color: white;
   background-color: blue;
   border-radius: 5px;
+  border: none;
+}
+
+.search-btn:hover
+{
+  background: rgba(0, 0, 255, .8);
+  transition: .25s ease-in-out;
 }
 
 .weather-info
