@@ -95,7 +95,7 @@ body
   margin-top: 10px;
 }
 
-.card
+.card0, .card1, .card2, .card3, .card4
 {
   text-align: center;
   font-size: 12px;
@@ -104,8 +104,9 @@ body
   border-radius: 5px;
 }
 
-.card p{
+.card0 p, .card1 p, .card2 p, .card3 p, .card4 p{
   margin: 5px;
+  font-size: 12px;
 }
 
 .saved-city
@@ -127,6 +128,9 @@ body
 
 hr.rounded
 {
+  margin-left: 0;
+  padding: 0;
+  width: 75%;
   border-top: 3px solid grey;
   border-radius: 1px;
 }
