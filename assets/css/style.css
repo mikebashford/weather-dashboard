@@ -13,7 +13,7 @@ body
   display: flex;
   justify-content: center;
   color: white;
-  background-color: blue;
+  background-color: navy;
 }
 
 .weather-content
@@ -61,17 +61,29 @@ body
 
 .weather-info
 {
+  display: flex;
   border: 1px solid black;
   position: absolute;
   margin-top: 2%;
   left: 15rem;
   width: 65%;
-  height: 25vh;
+  height: 28vh;
+}
+
+.main-column
+{
+  font-size: 16px;
+  margin-bottom: 5px;
 }
 
 .weather-info h2
 {
-  margin-top: auto;
+  margin-top: 10px;
+}
+
+.weather-info p
+{
+  margin-top: 5px;
 }
 
 .forecast
@@ -97,11 +109,14 @@ body
 
 .card0, .card1, .card2, .card3, .card4
 {
+  visibility: hidden;
   text-align: center;
   font-size: 12px;
   height: 20vh;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .3);
   border-radius: 5px;
+  background-color: navy;
+  color: white;
 }
 
 .card0 p, .card1 p, .card2 p, .card3 p, .card4 p{
