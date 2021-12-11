@@ -97,8 +97,36 @@ body
 
 .card
 {
-  font-size: 18px;
+  text-align: center;
+  font-size: 12px;
   height: 20vh;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .3);
   border-radius: 5px;
+}
+
+.card p{
+  margin: 5px;
+}
+
+.saved-city
+{
+  padding: 0;
+  margin-top: 5px;
+  width: 75%;
+  color: white;
+  background-color: gray;
+  border-radius: 5px;
+  border: none;
+}
+
+.saved-city:hover
+{
+  background: rgba(85, 85, 85, 0.8);
+  transition: .25s ease-in-out;
+}
+
+hr.rounded
+{
+  border-top: 3px solid grey;
+  border-radius: 1px;
 }

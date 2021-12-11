@@ -1,29 +1,29 @@
-// GIVEN a weather dashboard with form inputs
-// WHEN I search for a city
-// THEN I am presented with current and future conditions for that city and that city is added to the search history
-// WHEN I view current weather conditions for that city
-// THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
-// WHEN I view the UV index
-// THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
-// WHEN I view future weather conditions for that city
-// THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
-// WHEN I click on a city in the search history
-// THEN I am again presented with current and future conditions for that city
-
 const API_KEY = '151725f4087f7ff463e513a01d683d1f';
 
-var inputCity = document.querySelector('.search-bar');
-var updateCity = document.querySelector('.city');
-var updateTemp = document.querySelector('.temp');
-var updateWind = document.querySelector('.wind');
-var updateHumidity = document.querySelector('.humidity');
-var updateForecast = document.querySelector('.forecast');
-var searchCity = document.querySelector('.search-btn');
-var getCity = document.querySelector('#city');
+var searchCities = JSON.parse(localStorage.getItem('citiesArray')) || [];
 
-searchCity.addEventListener('click', () =>
+var saveSearches = (cityName) =>
 {
-  var city = getCity.value;
+  searchCities.push(cityName);
+  localStorage.setItem('citiesArray', JSON.stringify(searchCities));
+  
+  if(searchCities.length <= 1)
+  {
+    var dividerEl = document.createElement('hr');
+    $(dividerEl).addClass('rounded');
+    $('.search-bar').append(dividerEl);
+  }
+
+  var buttonEl = document.createElement('button');
+  $(buttonEl).addClass('saved-city');
+  buttonEl.innerHTML = cityName;
+  $('.search-bar').append(buttonEl);
+}
+
+$('.search-btn').on('click', function()
+{
+  var city = $('#city').val();
+  saveSearches(city);
   getWeather(city);
 })
 
@@ -31,19 +31,26 @@ var getWeather = (city) =>
 {
   fetch('https://api.openweathermap.org/data/2.5/forecast?q='+ city + '&units=imperial&appid=' + API_KEY)
   .then((response) => response.json())
-  .then((data) => this.displayWeather(data));
+  .then((data) =>
+  {
+    var { lat, lon } = data.city.coord;
+    fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&units=imperial&exclude=hourly&minutely&appid='+ API_KEY)
+    .then((response) => response.json())
+    .then((data) => 
+    {
+      $('.city').text(city);
+      var {temp, humidity, wind_speed, uvi} = data.current;
+      var {icon} = data.current.weather[0];
+
+      $('.temp').text('Temp: ' + temp + ' °F');
+      $('.wind').text('Wind: ' + wind_speed + ' MPH');
+      $('.humidity').text('Humidity: ' + humidity + ' %');
+      $('.uvi').text("UV index: " + uvi);
+      $('.weather-icon').attr('src', 'https://openweathermap.org/img/wn/' + icon + '@2x.png');
+    });
+  });
 }
 
-var displayWeather = (data) =>
-{
-  const { name } = data.city;
-  const { temp, humidity } = data.list[0].main;
-  const { speed } = data.list[0].wind;
-  const { lat, lon } = data.city.coord;
 
-  updateCity.innerHTML = name;
-  updateTemp.innerHTML = "Temp: " + temp + "&#8457";
-  updateHumidity.innerHTML = "Humidity: " + humidity + " %";
-  updateWind.innerHTML = "Wind: " + speed + " MPH";
-}
+
 
