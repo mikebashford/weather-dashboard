@@ -2,7 +2,7 @@
 const API_KEY = '151725f4087f7ff463e513a01d683d1f';
 //How many forecast cards I want to create
 var numberOfCards = 5;
-var savedForecast = {};
+var savedCities = JSON.parse(localStorage.getItem('cities')) || [];
 
 //Button that allows us find the weather when a city is entered
 $('.search-btn').on('click', function()
@@ -13,6 +13,7 @@ $('.search-btn').on('click', function()
   {
     $('#city').val(" ");
     getWeather(city);
+    saveSearches(city);
   }
 })
 //Gets the weather by city, converts to lat/lon, gets the needed forecast items
@@ -27,11 +28,24 @@ var getWeather = (city) =>
     .then((response) => response.json())
     .then((data) => 
     {
-      
       var {temp, humidity, wind_speed, uvi, dt} = data.current;
       var {icon} = data.current.weather[0];
       var date = new Date(dt * 1000).toLocaleDateString();
       var weatherIconEl = document.createElement('img');
+      var uvIndexEl = document.createElement('button');
+      uvIndexEl.textContent = uvi;
+      if( uvi <= 2)
+      {
+        $(uvIndexEl).addClass('uv-safe')
+      }
+      else if( uvi > 2 && uvi <= 7)
+      {
+        $(uvIndexEl).addClass('uv-moderate')
+      }
+      else
+      {
+        $(uvIndexEl).addClass('uv-danger')
+      }
 
       $(weatherIconEl).attr('src', 'https://openweathermap.org/img/wn/' + icon + '.png');
       $('.city').text(city + " " + date);
@@ -39,7 +53,7 @@ var getWeather = (city) =>
       $('.temp').text('Temp: ' + temp + ' °F');
       $('.wind').text('Wind: ' + wind_speed + ' MPH');
       $('.humidity').text('Humidity: ' + humidity + ' %');
-      $('.uvi').text("UV index: " + uvi); 
+      $('.uvi').text("UV index: ").append(uvIndexEl); 
 
       for(i = 0; i < numberOfCards; i++)
       {
@@ -61,7 +75,6 @@ var getWeather = (city) =>
         $('.card' + i).append(dateEl, iconEl, tempEl, windEl, humidEl);
         $('.card' + i).attr('style', 'visibility:visible;')
       }
-      saveSearches(city);
     })
   })
 }
@@ -69,22 +82,9 @@ var getWeather = (city) =>
 //Saves all the information from the previous search
 var saveSearches = (cityName) =>
 {
-
-  savedForecast =
-  {
-    weatherInfo: $('.weather-info'),
-    forecastCard: $('.forecast')
-  }
-
-  var saveHTML =
-  {
-    weather: savedForecast.weatherInfo[0].outerHTML,
-    forecast: savedForecast.forecastCard[0].outerHTML
-  }
-
-  localStorage.setItem(JSON.stringify(cityName), JSON.stringify(saveHTML));
-
-  if(localStorage.length <= 1)
+  savedCities.push(cityName);
+  localStorage.setItem('cities', JSON.stringify(savedCities));
+  if(savedCities.length <= 1)
   {
     var dividerEl = document.createElement('hr');
     $(dividerEl).addClass('rounded');
@@ -97,8 +97,8 @@ var saveSearches = (cityName) =>
 
   $(buttonEl).on('click', function()
   {
-    console.log('I was pressed.')
-    getPreviousSearch(cityName);
+    clearPreviousData();
+    getWeather(cityName);
   })
 }
 
@@ -118,7 +118,4 @@ var clearPreviousData = () =>
   $('.icon-column').empty();
 }
 
-var getPreviousSearch = (cityName) =>
-{
-  localStorage.getItem(cityName);
-}
+localStorage.clear();
