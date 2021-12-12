@@ -45,7 +45,7 @@ body
 
 .search-btn
 {
-  width: 75%;
+  width: 80%;
   color: white;
   background-color: blue;
   border-radius: 5px;
@@ -66,7 +66,7 @@ body
   margin-top: 2%;
   left: 20rem;
   width: 65%;
-  height: 25vh;
+  height: 20vh;
 }
 
 .main-column
@@ -89,7 +89,7 @@ body
 {
   position: absolute;
   left: 20rem;
-  top: 16rem;
+  top: 18rem;
   width: 80%;
 }
 
@@ -112,7 +112,7 @@ body
   visibility: hidden;
   text-align: center;
   font-size: 12px;
-  height: 25vh;
+  height: 20vh;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .3);
   border-radius: 5px;
   background-color: navy;
@@ -121,14 +121,14 @@ body
 
 .card0 p, .card1 p, .card2 p, .card3 p, .card4 p{
   margin: 10px;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .saved-city
 {
   padding: 0;
   margin-top: 5px;
-  width: 75%;
+  width: 80%;
   color: white;
   background-color: gray;
   border-radius: 5px;
@@ -145,7 +145,7 @@ hr.rounded
 {
   margin-left: 0;
   padding: 0;
-  width: 75%;
+  width: 80%;
   border-top: 3px solid grey;
   border-radius: 1px;
 }
