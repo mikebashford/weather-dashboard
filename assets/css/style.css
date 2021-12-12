@@ -1,5 +1,6 @@
 body
 {
+  padding: 0;
   margin: 0;
   height: 100%;
   width: 100%;
@@ -7,9 +8,7 @@ body
 
 .heading
 {
-  top: 0;
-  left: 0;
-  width: 100%;
+  max-width: 100%;
   display: flex;
   justify-content: center;
   color: white;
@@ -67,7 +66,7 @@ body
   margin-top: 2%;
   left: 20rem;
   width: 65%;
-  height: 28vh;
+  height: 25vh;
 }
 
 .main-column
@@ -113,7 +112,7 @@ body
   visibility: hidden;
   text-align: center;
   font-size: 12px;
-  height: 20vh;
+  height: 25vh;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .3);
   border-radius: 5px;
   background-color: navy;
@@ -121,7 +120,7 @@ body
 }
 
 .card0 p, .card1 p, .card2 p, .card3 p, .card4 p{
-  margin: 5px;
+  margin: 10px;
   font-size: 12px;
 }
 
