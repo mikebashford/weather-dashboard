@@ -23,17 +23,20 @@ var getWeather = (city) =>
   .then((response) => response.json())
   .then((data) =>
   {
+    //use the lat/lon to grab the rest of the data
     var { lat, lon } = data.city.coord;
     fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&units=imperial&exclude=hourly&minutely&appid='+ API_KEY)
     .then((response) => response.json())
     .then((data) => 
     {
+      //create the variable to grab the data from api
       var {temp, humidity, wind_speed, uvi, dt} = data.current;
       var {icon} = data.current.weather[0];
       var date = new Date(dt * 1000).toLocaleDateString();
       var weatherIconEl = document.createElement('img');
       var uvIndexEl = document.createElement('button');
       uvIndexEl.textContent = uvi;
+      //test the uvi to determine which class to add to the button
       if( uvi <= 2)
       {
         $(uvIndexEl).addClass('uv-safe')
@@ -46,7 +49,7 @@ var getWeather = (city) =>
       {
         $(uvIndexEl).addClass('uv-danger')
       }
-
+      //update all the data on the web page
       $(weatherIconEl).attr('src', 'https://openweathermap.org/img/wn/' + icon + '.png');
       $('.city').text(city + " " + date);
       $('.icon-column').append(weatherIconEl);
@@ -54,7 +57,7 @@ var getWeather = (city) =>
       $('.wind').text('Wind: ' + wind_speed + ' MPH');
       $('.humidity').text('Humidity: ' + humidity + ' %');
       $('.uvi').text("UV index: ").append(uvIndexEl); 
-
+      //create the 5 day forecast cards and insert the data
       for(i = 0; i < numberOfCards; i++)
       {
         var dateEl = document.createElement('p');

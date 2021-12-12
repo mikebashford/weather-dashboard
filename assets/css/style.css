@@ -65,7 +65,7 @@ body
   border: 1px solid black;
   position: absolute;
   margin-top: 2%;
-  left: 15rem;
+  left: 20rem;
   width: 65%;
   height: 28vh;
 }
@@ -89,14 +89,15 @@ body
 .forecast
 {
   position: absolute;
-  left: 15rem;
-  top: 15rem;
+  left: 20rem;
+  top: 16rem;
   width: 80%;
 }
 
 .forecast h1
 {
- margin: auto;
+  left: 15rem;
+  top: 15rem;
 }
 
 .column
